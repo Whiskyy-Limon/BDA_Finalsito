@@ -1,27 +1,104 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- BOXICONS-->
-    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <title>Login y registro</title>
     <link rel="stylesheet" href="{% static 'core/css/login.css' %}">
-    <title>Login & Register | Ludiflex</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="wrapper">
-        <div class="form-header">
-            <div class="titles">
-                <div class="title-login">Login</div>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    
+    <div class="background"></div>
+    <div class="container">
+        <div class="content">
+            <h2 class="logo"><i class='bx bx-book'></i> Legendaria</h2>
+
+            <div class="text-sci">
+                <h2>Bienvenido!<br><span>Empieza una aventura extraordinaria!</span></h2>
+
+                <p>Quieres divertirte y aprender a la misma vez?? Entonses registrate a LEGENDARIA</p>
+
+
             </div>
-            <form action="#" class="login-form" autocomplete="off">
-                <div class="input-box">
-                    <input type="text" class="input-field" id="log-email">
-                    <label for="log-email" class="label">Email</label>
-                </div>
-            </form>
+        </div>
+
+
+        <div class="logreg-box">
+            <div class="form-box login">
+                <form action="#">
+                    <h2>Iniciar Sesion</h2>
+
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-envelope'></i></span>
+                        <input type="text" name="email" required>
+                        <label>Email</label>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-lock'></i></span>
+                        <input type="password" name="password" required>
+                        <label>Contraseña</label>
+                    </div>
+
+    
+
+                    <div class="remember-forgot">
+                        <label><input type="checkbox">Recuerdame</label>
+                        <a href="#" class="register-link">Olvidaste tu Contraseña</a>
+                    </div>
+
+                    <button type="submit" class="btn">Iniciar Sesion</button>
+
+                    <div class="login-register">
+                        <p>No tienes una cuenta? <a href="#" class="register-link">Registrate</a></p>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="form-box register">
+                <form action="#">
+                    <h2>Registrate</h2>
+
+                    <div class="input-box">
+                        <span class="icon"><i class='bx  bx-user'></i> </span>
+                        <input type="text" name="email" required>
+                        <label>Nombre</label>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-envelope'></i></span>
+                        <input type="text" name="email" required>
+                        <label>Email</label>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="icon"><i class='bx bxs-lock'></i></span>
+                        <input type="password" name="password" required>
+                        <label>Contraseña</label>
+                    </div>
+
+                    <button type="submit" class="btn">Registrate</button>
+
+                    <div class="login-register">
+                        <p>Ya tienes una cuenta? <a href="#" class="login-link">Iniciar Sesion</a></p>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
-    
+
+    <script src="{% static 'core/js/login.js' %}" defer></script>
 </body>
-</html> 
+</html>
