@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Equipos Disponibles</h2>
+  <ul>
+    {% for equipo in equipos %}
+      <li>
+        {{ equipo.nombre_equipo }} - {{ equipo.clase.nombre }}
+        <a href="{% url 'unirse_equipo' equipo.id %}">Unirse</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

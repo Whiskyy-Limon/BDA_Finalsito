@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Unirse a un grupo - {{ clase.nombre }}</h2>
+
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="grupo">Selecciona un grupo:</label>
+        <select name="grupo_id" id="grupo" class="form-control">
+            {% for grupo in grupos %}
+            <option value="{{ grupo.id }}">{{ grupo.nombre_equipo }} ({{ grupo.personajeequipo_set.count }} miembros)</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Unirse</button>
+</form>
+
+<a href="{% url 'panel_alumno' %}" class="btn btn-secondary mt-3">Volver</a>
+{% endblock %}

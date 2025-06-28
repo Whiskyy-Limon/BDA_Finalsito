@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from datetime import date
 
 # Opciones para roles de usuario
 ROL_CHOICES = [
@@ -12,6 +13,7 @@ ESTADO_MISION_CHOICES = [
     ('pendiente', 'Pendiente'),
     ('completada', 'Completada'),
     ('en_progreso', 'En progreso'),
+    ('fallida', 'Fallida'),
 ]
 
 # Usuario personalizado
@@ -95,10 +97,14 @@ class PersonajeEquipo(models.Model):
     personaje = models.ForeignKey(Personaje, on_delete=models.CASCADE)
     equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE)
 
+    def save(self, *args, **kwargs):
+        if PersonajeEquipo.objects.filter(equipo=self.equipo).count() >= 4:
+            raise ValueError("Este equipo ya tiene el máximo de 4 integrantes.")
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.personaje} en {self.equipo}"
 
-# Relación entre personaje y misión
 class PersonajeMision(models.Model):
     personaje = models.ForeignKey(Personaje, on_delete=models.CASCADE)
     mision = models.ForeignKey(Mision, on_delete=models.CASCADE)
@@ -106,3 +112,10 @@ class PersonajeMision(models.Model):
 
     def __str__(self):
         return f"{self.personaje} - {self.mision} ({self.estado})"
+
+    def verificar_entrega(self):
+        if self.estado == 'pendiente' and self.mision.fecha_entrega < date.today():
+            self.estado = 'vencida'
+            self.personaje.vida = max(self.personaje.vida - 10, 0)  # castigo por no entregar
+            self.personaje.save()
+            self.save()

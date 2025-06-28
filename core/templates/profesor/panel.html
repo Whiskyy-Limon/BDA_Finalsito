@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Mis Clases</h2>
+  {% for clase in clases %}
+    <div class="card p-3 mb-3 shadow">
+      <h4>{{ clase.nombre }} - {{ clase.grado }}</h4>
+      <div class="d-flex gap-2 mt-2">
+        <a href="{% url 'descontar_vida' clase.id %}" class="btn btn-danger">
+          Descontar Vida por Tareas No Entregadas
+        </a>
+        <a href="{% url 'estado_entregas' %}?clase_id={{ clase.id }}" class="btn btn-info">
+          Ver Entregas de Misiones
+        </a>
+        <a href="{% url 'crear_mision' %}?clase_id={{ clase.id }}" class="btn btn-primary">
+          Crear Nueva Misión
+        </a>
+        <a href="{% url 'crear_equipo' %}?clase_id={{ clase.id }}" class="btn btn-success">
+          Crear Equipos
+        </a>
+      </div>
+    </div>
+  {% empty %}
+    <p>No tienes clases asignadas.</p>
+  {% endfor %}
+</div>
+{% endblock %}
